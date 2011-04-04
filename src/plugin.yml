@@ -1,0 +1,68 @@
+name: MultiVerse
+main: com.onarandombox.Rigby.MultiVerse.MultiVerse
+author: Rigby
+version: 1.5 (Permissions 2.1+)
+commands:
+  mvcreate:
+    description: World create command
+    usage: /<command>
+  mvimport:
+    description: World import command
+    usage: /<command>
+  mvremove:
+    description: World delete command
+    usage: /<command>
+  mvmodify:
+    description: Modify the settings of an existing world
+    usage: /<command>
+  mvprename:
+    description: Rename a Portal
+    usage: /<command>
+  mvtp:
+    description: Command to teleport between Worlds
+    usage: /<command>
+  mvtpt:
+    description: Command to teleport a target to a World/Portal
+    usage: /<command>
+  mvlist:
+    description: Print list of loaded Worlds
+    usage: /<command>
+  mvsetspawn:
+    description: Set the spawn area for a particular World
+    usage: /<command>
+  mvspawn:
+    description: Teleport to the spawn area
+    usage: /<command>
+  mvhelp:
+    description: Display MultiVerse Help to the Player
+    usage: /<command>
+  mvpc:
+    description: Create Portals
+    usage: /<command>
+  mvpcreate:
+    description: Create Portals
+    usage: /<command>
+  mvpselect:
+    description: Display selected Portal or Select a Portal
+    usage: /<command>
+  mvps:
+    description: Display selected Portal or Select a Portal
+    usage: /<command>
+  mvpremove:
+    description: Remove a Users Portal
+    usage: /<command>
+  mvpr:
+    description: Remove a Users Portal
+    usage: /<command>
+  mvplist:
+    description: Display all Portals the User can use.
+    usage: /<command>
+  mvpbuild:
+    description: Build a Portal
+    usage: /<command>
+  mvpd:
+    description: Set/Clear a Portals Destination
+    usage: /<command>
+  mvcoord:
+    description: Display World and Coordinates
+    usage: /<command>
