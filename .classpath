@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="com/onarandombox/Rigby/util/" kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="var" path="LIBRARY/bukkit-0.0.1-SNAPSHOT-b502.jar"/>
+	<classpathentry kind="var" path="LIBRARY/craftbukkit-0.0.1-SNAPSHOT-b627.jar"/>
+	<classpathentry kind="var" path="LIBRARY/iConomy-463.jar"/>
+	<classpathentry kind="var" path="LIBRARY/Permissions-255.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
