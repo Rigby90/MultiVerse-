@@ -178,14 +178,6 @@ public class MultiVerse extends JavaPlugin {
     }
     
     public void reloadPlayerSessions(){
-        /**
-         * Incase of a /reload we need to make sure every player online gets
-         * setup with a player session.
-         */
-        reloadPlayerSessions();
-    }
-    
-    public void reloadPlayerSessions(){
         Player[] p = this.getServer().getOnlinePlayers();
         for (Player element : p) {
             this.playerSessions.put(element.getName(), new MVPlayerSession(element, this.configMV));
