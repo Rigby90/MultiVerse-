@@ -203,8 +203,13 @@ public class MVPlayerListener extends PlayerListener {
          */
         final Player pl = event.getPlayer();
         MVPlayerSession ps = this.plugin.playerSessions.get(pl.getName());
+<<<<<<< HEAD
         if(ps == null) {
             plugin.reloadPlayerSessions();
+=======
+        if(ps==null){
+            this.plugin.reloadPlayerSessions();
+>>>>>>> dthielke
             ps = this.plugin.playerSessions.get(pl.getName());
         }
         Location poloc = ps.loc;

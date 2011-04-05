@@ -173,6 +173,11 @@ public class MultiVerse extends JavaPlugin {
         pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Priority.High, this);
         pm.registerEvent(Event.Type.BLOCK_PLACE, blockListener, Priority.High, this);
         pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.High, this);
+        
+        reloadPlayerSessions();
+    }
+    
+    public void reloadPlayerSessions(){
         /**
          * Incase of a /reload we need to make sure every player online gets
          * setup with a player session.
