@@ -161,13 +161,7 @@ public class MultiVerse extends JavaPlugin {
          * Setup all the events which we need to listen for.
          */
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Priority.Low, this); // Low
-                                                                                      // so
-                                                                                      // it
-                                                                                      // acts
-                                                                                      // above
-                                                                                      // any
-                                                                                      // other.
+        pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Priority.Low, this);
         pm.registerEvent(Event.Type.PLAYER_CHAT, playerListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.PLAYER_RESPAWN, playerListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
@@ -183,6 +177,10 @@ public class MultiVerse extends JavaPlugin {
          * Incase of a /reload we need to make sure every player online gets
          * setup with a player session.
          */
+        reloadPlayerSessions();
+    }
+    
+    public void reloadPlayerSessions(){
         Player[] p = this.getServer().getOnlinePlayers();
         for (Player element : p) {
             this.playerSessions.put(element.getName(), new MVPlayerSession(element, this.configMV));
