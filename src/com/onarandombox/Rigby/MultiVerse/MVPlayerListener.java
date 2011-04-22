@@ -10,8 +10,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.config.Configuration;
@@ -67,7 +69,7 @@ public class MVPlayerListener extends PlayerListener {
      * Coordinates etc to.
      */
     @Override
-    public void onPlayerJoin(PlayerEvent event) {
+    public void onPlayerJoin(PlayerJoinEvent event) {
         final Player p = event.getPlayer();
         this.plugin.playerSessions.put(event.getPlayer().getName(), new MVPlayerSession(event.getPlayer(), this.configuration));
     }
@@ -77,7 +79,7 @@ public class MVPlayerListener extends PlayerListener {
      * server.
      */
     @Override
-    public void onPlayerQuit(PlayerEvent event) {
+    public void onPlayerQuit(PlayerQuitEvent event) {
         Player p = event.getPlayer();
         this.plugin.playerSessions.remove(p.getName());
     }

@@ -35,7 +35,7 @@ public class MVBlockListener extends BlockListener {
      * a portal, if so cancel it.
      */
     @Override
-    public void onBlockFlow(BlockFromToEvent event) {
+    public void onBlockFromTo(BlockFromToEvent event) {
         if (event.isCancelled()) {
             return;
         }
