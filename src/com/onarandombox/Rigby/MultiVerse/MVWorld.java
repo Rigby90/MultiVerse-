@@ -127,14 +127,13 @@ public class MVWorld {
 
     public void setMobSpawn(Boolean mobs) {
         this.mobs = mobs;
-        ((CraftWorld) this.world).getHandle().D = mobs;
+        ((CraftWorld) this.world).getHandle().allowMonsters = mobs;
         saveAll();
     }
 
     public void setAnimalSpawn(Boolean animals) {
         this.animals = animals;
-        ((CraftWorld) this.world).getHandle().E = animals;
-        // TODO: Cycle through all living entities and kill them.
+        ((CraftWorld) this.world).getHandle().allowAnimals = animals;
         saveAll();
     }
 

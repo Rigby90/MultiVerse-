@@ -173,11 +173,11 @@ public class MultiVerse extends JavaPlugin {
         pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Priority.High, this);
         pm.registerEvent(Event.Type.BLOCK_PLACE, blockListener, Priority.High, this);
         pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.High, this);
-        
+
         reloadPlayerSessions();
     }
-    
-    public void reloadPlayerSessions(){
+
+    public void reloadPlayerSessions() {
         Player[] p = this.getServer().getOnlinePlayers();
         for (Player element : p) {
             this.playerSessions.put(element.getName(), new MVPlayerSession(element, this.configMV));
@@ -200,7 +200,7 @@ public class MultiVerse extends JavaPlugin {
         Player player = (Player) sender;
 
         if (MultiVerse.Permissions == null) {
-            sender.sendMessage("Permissions 2.1 is not Enabled, or hasn't been found.");
+            sender.sendMessage("Permissions is not Enabled, or hasn't been found.");
             return true;
         }
 
@@ -416,16 +416,8 @@ public class MultiVerse extends JavaPlugin {
                 /**
                  * Quick work around to set the Mob/Animal settings.
                  */
-                // 1.2_02/01 =
-                // K = Monsters
-                // L = Animals
-                // 1.3 =
-                // D = Monsters
-                // E = Animals
-                ((CraftWorld) world).getHandle().D = mobs;
-                ((CraftWorld) world).getHandle().E = animals;
-                // ((CraftWorld) world).getHandle().q.a(i, j, k);
-                // Spawn Crap
+                ((CraftWorld) world).getHandle().allowMonsters = mobs;
+                ((CraftWorld) world).getHandle().allowAnimals = animals;
                 /**
                  * Place the World into hour HashMap with our Custom Class, the
                  * custom class also gets passed along the config file so it can
@@ -462,8 +454,8 @@ public class MultiVerse extends JavaPlugin {
              * are then saved into the config.
              */
             this.MVWorlds.put(world.getName(), new MVWorld(world, this.configWorlds, this));
-            this.MVWorlds.get(world.getName()).setMobSpawn(((CraftWorld) world).getHandle().D);
-            this.MVWorlds.get(world.getName()).setAnimalSpawn(((CraftWorld) world).getHandle().E);
+            this.MVWorlds.get(world.getName()).setMobSpawn(((CraftWorld) world).getHandle().allowMonsters);
+            this.MVWorlds.get(world.getName()).setAnimalSpawn(((CraftWorld) world).getHandle().allowAnimals);
             this.MVWorlds.get(world.getName()).saveAll();
             /**
              * Increment the count again.
