@@ -77,9 +77,31 @@ public class MultiVerse extends JavaPlugin {
     private MVPluginListener pluginListener;
 
     @Override
+    public void onLoad() {
+        getDataFolder().mkdirs();
+
+        configMV = new Configuration(new File(this.getDataFolder(), "MultiVerse.yml"));
+        configWorlds = new Configuration(new File(this.getDataFolder(), "Worlds.yml"));
+        configPortals = new Configuration(new File(this.getDataFolder(), "Portals.yml"));
+        confSetup = new MVConfiguration(this.getDataFolder(), this);
+
+        /**
+         * First we run our 'confSetup' class to check if the Configuration
+         * files exist. If either of them is missing it will create it with a
+         * empty template.
+         */
+        confSetup.setupConfigs();
+        /**
+         * Load the main MultiVerse properties file.
+         */
+        configMV.load();
+        configWorlds.load();
+        loadWorlds();
+    }
+
+    @Override
     public void onEnable() {
         pluginListener = new MVPluginListener(this);
-        getDataFolder().mkdirs();
 
         getServer().getPluginManager().registerEvent(Event.Type.PLUGIN_ENABLE, pluginListener, Priority.Monitor, this);
 
@@ -88,11 +110,6 @@ public class MultiVerse extends JavaPlugin {
         } else {
             log.info(logPrefix + "Permissions Found");
         }
-
-        configMV = new Configuration(new File(this.getDataFolder(), "MultiVerse.yml"));
-        configWorlds = new Configuration(new File(this.getDataFolder(), "Worlds.yml"));
-        configPortals = new Configuration(new File(this.getDataFolder(), "Portals.yml"));
-        confSetup = new MVConfiguration(this.getDataFolder(), this);
 
         playerListener = new MVPlayerListener(this, configMV);
         blockListener = new MVBlockListener(this, configMV);
@@ -120,16 +137,7 @@ public class MultiVerse extends JavaPlugin {
          * "[MultiVerse] requires CraftBukkit build " + CBVer +
          * "+. Proceed with CAUTION!"); }
          */
-        /**
-         * First we run our 'confSetup' class to check if the Configuration
-         * files exist. If either of them is missing it will create it with a
-         * empty template.
-         */
-        confSetup.setupConfigs();
-        /**
-         * Load the main MultiVerse properties file.
-         */
-        configMV.load();
+
         /**
          * If enabled start up the update checker, every now and then this will
          * check the version file on the server to see if it's currently running
@@ -149,13 +157,11 @@ public class MultiVerse extends JavaPlugin {
          * Since we have everything we need to run the plugin we can now load
          * the config files.
          */
-        configWorlds.load();
         configPortals.load();
         /**
          * Now we run the functions to place each world and portal into our
          * HashMap with our Custom Class.
          */
-        loadWorlds();
         loadPortals();
         /**
          * Setup all the events which we need to listen for.
