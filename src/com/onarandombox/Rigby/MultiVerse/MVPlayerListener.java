@@ -294,9 +294,9 @@ public class MVPlayerListener extends PlayerListener {
              * int delay = this.configuration.getInt("teleportdelay", 5);
              * timedTeleport(pl,d,delay,price);
              */
-            if (MultiVerse.useiConomy && !MultiVerse.Permissions.has(pl, "multiverse.portal.exempt")) {
+            if (MultiVerse.useiConomy && !MultiVerse.Permissions.has(pl, "multiverse.portal.exempt") && price > 0) {
                 double balance = iConomy.getBank().getAccount(pl.getName()).getBalance();
-                if (balance > price) {
+                if (balance >= price) {
                     double amount = price;
                     iConomy.getBank().getAccount(pl.getName()).setBalance(balance - amount);
                     pl.sendMessage(ChatColor.RED + this.plugin.logPrefix + " You have been charged " + amount + " " + iConomy.getBank().getCurrency());
