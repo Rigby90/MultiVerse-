@@ -18,7 +18,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.config.Configuration;
 
-import com.nijiko.coelho.iConomy.iConomy;
+import com.iConomy.*;
+import com.iConomy.system.Holdings;
 
 @SuppressWarnings("unused")
 public class MVPlayerListener extends PlayerListener {
@@ -295,11 +296,11 @@ public class MVPlayerListener extends PlayerListener {
              * timedTeleport(pl,d,delay,price);
              */
             if (MultiVerse.useiConomy && !MultiVerse.Permissions.has(pl, "multiverse.portal.exempt") && price > 0) {
-                double balance = iConomy.getBank().getAccount(pl.getName()).getBalance();
-                if (balance >= price) {
-                    double amount = price;
-                    iConomy.getBank().getAccount(pl.getName()).setBalance(balance - amount);
-                    pl.sendMessage(ChatColor.RED + this.plugin.logPrefix + " You have been charged " + amount + " " + iConomy.getBank().getCurrency());
+                //double balance = iConomy.getBank().getAccount(pl.getName()).getBalance();
+                Holdings balance = iConomy.getAccount(pl.getName()).getHoldings();
+                if (balance.hasEnough(price)) {
+                    balance.subtract(price);
+                    pl.sendMessage(ChatColor.RED + this.plugin.logPrefix + " You have been charged " + iConomy.format(price));
                 } else {
                     if (ps.getAlertable()) {
                         pl.sendMessage("Sorry but you do not have the required funds for this portal");
