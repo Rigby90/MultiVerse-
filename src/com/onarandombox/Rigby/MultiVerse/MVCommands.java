@@ -290,9 +290,7 @@ public class MVCommands {
         
         this.plugin.MVPortals.get(name).setLocation(player.getWorld(), v[0], v[1]);
         this.plugin.MVPortals.get(name).setOwner(player.getName());
-        if(this.plugin.MVPortals.containsKey(name)) {
-        	log.info("[mv] - Called in mvCreate" + this.plugin.MVPortals.get(name).toString());
-        }
+
         // log.info("Why - " + split.length);
 
         if (split.length == 1) {
@@ -323,7 +321,6 @@ public class MVCommands {
             }
         }
         this.plugin.MVPortals.get(name).save();
-        log.info("[mv] - Called after save" + this.plugin.MVPortals.get(name).toString());
     }
 
     /**
