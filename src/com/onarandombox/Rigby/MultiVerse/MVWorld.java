@@ -147,6 +147,7 @@ public class MVWorld {
 
     public void setPVP(Boolean pvp) {
         this.pvp = pvp;
+        ((CraftWorld) this.world).getHandle().pvpMode = pvp;
     }
 
     public void setPrice(Double price) {

@@ -151,7 +151,7 @@ public class MVCommands {
                     set = true;
                 }
                 if (set) {
-                    player.sendMessage(ChatColor.RED + name + " - Animals set to " + result.toString());
+                    player.sendMessage(ChatColor.RED + name + " - PVP set to " + result.toString());
                     this.plugin.MVWorlds.get(name).setPVP(result);
                     this.plugin.MVWorlds.get(name).saveAll();
                     return;

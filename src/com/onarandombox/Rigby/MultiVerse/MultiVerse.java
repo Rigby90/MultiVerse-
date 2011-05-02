@@ -69,11 +69,10 @@ public class MultiVerse extends JavaPlugin {
      */
     public HashMap<String, MVPlayerSession> playerSessions = new HashMap<String, MVPlayerSession>();
     /**
-     * Setup the block/player/entity listener.
+     * Setup the block/player/plugin listener.
      */
     private MVPlayerListener playerListener;
     private MVBlockListener blockListener;
-    private MVEntityListener entityListener;
     private MVPluginListener pluginListener;
 
     @Override
@@ -96,7 +95,6 @@ public class MultiVerse extends JavaPlugin {
 
         playerListener = new MVPlayerListener(this, configMV);
         blockListener = new MVBlockListener(this, configMV);
-        entityListener = new MVEntityListener(this);
 
         /**
          * Output a little snipper to state that the Plugin is now enabled.
@@ -172,7 +170,6 @@ public class MultiVerse extends JavaPlugin {
         pm.registerEvent(Event.Type.BLOCK_DAMAGE, blockListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Priority.High, this);
         pm.registerEvent(Event.Type.BLOCK_PLACE, blockListener, Priority.High, this);
-        pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.High, this);
 
         reloadPlayerSessions();
     }
@@ -394,6 +391,10 @@ public class MultiVerse extends JavaPlugin {
                  */
                 Boolean animals = this.configWorlds.getBoolean("worlds." + worldKey + ".animals", true);
                 /**
+                 * Grab the pvp Setting - True/False - Default = true
+                 */
+                Boolean pvp = this.configWorlds.getBoolean("worlds." + worldKey + ".pvp", true);
+                /**
                  * We need to take the Environment type and grab the real
                  * environment ENUM.
                  */
@@ -418,6 +419,7 @@ public class MultiVerse extends JavaPlugin {
                  */
                 ((CraftWorld) world).getHandle().allowMonsters = mobs;
                 ((CraftWorld) world).getHandle().allowAnimals = animals;
+                ((CraftWorld) world).getHandle().pvpMode = pvp;
                 /**
                  * Place the World into hour HashMap with our Custom Class, the
                  * custom class also gets passed along the config file so it can
@@ -456,6 +458,7 @@ public class MultiVerse extends JavaPlugin {
             this.MVWorlds.put(world.getName(), new MVWorld(world, this.configWorlds, this));
             this.MVWorlds.get(world.getName()).setMobSpawn(((CraftWorld) world).getHandle().allowMonsters);
             this.MVWorlds.get(world.getName()).setAnimalSpawn(((CraftWorld) world).getHandle().allowAnimals);
+            this.MVWorlds.get(world.getName()).setPVP(((CraftWorld) world).getHandle().pvpMode);
             this.MVWorlds.get(world.getName()).saveAll();
             /**
              * Increment the count again.
