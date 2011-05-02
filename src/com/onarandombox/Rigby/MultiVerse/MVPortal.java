@@ -49,7 +49,7 @@ public class MVPortal {
         String[] max = v[1].split(",");
         this.min = new Vector(Double.valueOf(min[0].toString()), Double.valueOf(min[1].toString()), Double.valueOf(min[2].toString()));
         this.max = new Vector(Double.valueOf(max[0].toString()), Double.valueOf(max[1].toString()), Double.valueOf(max[2].toString()));
-        this.center = new Vector((this.max.getBlockX() + this.min.getBlockX()) / 2, this.min.getBlockY(), (this.max.getBlockZ() + this.min.getBlockZ()) / 2);
+        this.center = calcCenter(this.min, this.max);
         this.world = this.plugin.getServer().getWorld(config.getString("portals." + name + ".world", ""));
     }
 
@@ -61,10 +61,15 @@ public class MVPortal {
         return this.owner;
     }
 
+    private Vector calcCenter(Vector min, Vector max) {
+        return new Vector((max.getBlockX() + min.getBlockX()) / 2, min.getBlockY(), (max.getBlockZ() + min.getBlockZ()) / 2);
+    }
+
     public void setLocation(World world, Vector min, Vector max) {
         this.world = world;
         this.min = min;
         this.max = max;
+        this.center = calcCenter(min, max);
     }
 
     public void setDestLocation(String l) {
