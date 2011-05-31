@@ -221,12 +221,6 @@ public class MVPlayerListener extends PlayerListener {
         } else {
             ps.loc = pl.getLocation();
         }
-        /*
-         * Broken... Breaks other Player_Move plugins. if(ps.teleporting==true){
-         * 
-         * ps.teleporting=false; event.setFrom(event.getTo());
-         * event.setTo(event.getTo()); pl.teleportTo(event.getTo()); return; }
-         */
         /**
          * Start the Price off at 0, this will change according to the
          * Portal/World Settings.
@@ -291,12 +285,7 @@ public class MVPlayerListener extends PlayerListener {
                 ps.sendMessage("Sorry but you cannot enter the '" + d.getWorld().getName() + "' world.");
                 return;
             }
-            /*
-             * int delay = this.configuration.getInt("teleportdelay", 5);
-             * timedTeleport(pl,d,delay,price);
-             */
             if (MultiVerse.useiConomy && !MultiVerse.Permissions.has(pl, "multiverse.portal.exempt") && price > 0) {
-                //double balance = iConomy.getBank().getAccount(pl.getName()).getBalance();
                 Holdings balance = iConomy.getAccount(pl.getName()).getHoldings();
                 if (balance.hasEnough(price)) {
                     balance.subtract(price);
@@ -309,9 +298,13 @@ public class MVPlayerListener extends PlayerListener {
                     return;
                 }
             }
-            event.setFrom(d);
-            event.setTo(d);
-            pl.teleport(d);
+            final Location destination = d;
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                @Override
+                public void run() {
+                    pl.teleport(destination);
+                }
+            });
             ps.setTPCooldown();
             return;
         }

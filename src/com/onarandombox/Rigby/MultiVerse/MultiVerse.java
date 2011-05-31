@@ -3,6 +3,7 @@ package com.onarandombox.Rigby.MultiVerse;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bukkit.World;
@@ -40,7 +41,7 @@ public class MultiVerse extends JavaPlugin {
     private final Logger log = Logger.getLogger("Minecraft");
     public final String logPrefix = "[MultiVerse] ";
     /**
-     * Setup all the Configuration varibles... first 3 are actual config files
+     * Setup all the Configuration variables... first 3 are actual config files
      * to read write to, 4 one is the process we run to setup the initial files.
      */
     public Configuration configMV;
@@ -52,11 +53,6 @@ public class MultiVerse extends JavaPlugin {
      */
     public MVUtils utils = new MVUtils(this);
     private MVCommands commandsMV = new MVCommands(this);
-    /**
-     * Setup the Update Checker which we'll start onEnable, no point starting it
-     * any earlier incase we disable before we actually enable.
-     */
-    public MVUpdateCheck updateCheck = null;
     /**
      * HashMaps to contain the current Worlds and Portals loaded into
      * MultiVerse.
@@ -97,27 +93,9 @@ public class MultiVerse extends JavaPlugin {
         blockListener = new MVBlockListener(this, configMV);
 
         /**
-         * Output a little snipper to state that the Plugin is now enabled.
+         * Output a little snippet to state that the Plugin is now enabled.
          */
         log.info(logPrefix + "- Version " + this.getDescription().getVersion() + " Enabled");
-        /**
-         * CraftBukkit Version checking -- Removed for now as the way they
-         * display the CB Build has changed.
-         */
-        /*
-         * try // Example Output -
-         * "git-Bukkit-0.0.0-382-g026d9db-b297 (MC: 1.2_01)" string[] verString
-         * = this.getServer().getVersion().split("-"); int verNumber =
-         * Integer.valueOf
-         * ((verString[verString.length-1].split(" ")[0].replace("b", "")));
-         * if(!(verNumber>=CBVer)){ log.log(Level.WARNING,
-         * "[MultiVerse] requires CraftBukkit build " + CBVer +
-         * "+, disabling MultiVerse to protect your server.");
-         * this.getServer().getPluginManager().disablePlugin(this); return; } }
-         * catch (Exception ex){ log.log(Level.WARNING,
-         * "[MultiVerse] requires CraftBukkit build " + CBVer +
-         * "+. Proceed with CAUTION!"); }
-         */
         /**
          * First we run our 'confSetup' class to check if the Configuration
          * files exist. If either of them is missing it will create it with a
@@ -128,14 +106,6 @@ public class MultiVerse extends JavaPlugin {
          * Load the main MultiVerse properties file.
          */
         configMV.load();
-        /**
-         * If enabled start up the update checker, every now and then this will
-         * check the version file on the server to see if it's currently running
-         * the latest version.
-         */
-        if (configMV.getBoolean("checkupdates", true)) {
-            // updateCheck = new MVUpdateCheck(this);
-        }
         /**
          * Check whether iConomy is enabled, then check whether they want
          * players to be charged for using Portals.
@@ -399,10 +369,11 @@ public class MultiVerse extends JavaPlugin {
                  * environment ENUM.
                  */
                 Environment env;
-                if (wEnvironment.equalsIgnoreCase("NETHER")) {
-                    env = Environment.NETHER;
-                } else {
-                    env = Environment.NORMAL;
+                try {
+                	env = Environment.valueOf(wEnvironment);
+                } catch (IllegalArgumentException e) {
+                	log.info(logPrefix + "'" + worldKey + "' - " + wEnvironment + " - Invalid Environment Type");
+                	continue;
                 }
                 /**
                  * Output that we are loading a world with a specific
@@ -557,9 +528,6 @@ public class MultiVerse extends JavaPlugin {
          * Checking, this needs to be cancelled otherwise even though the plugin
          * is disabled they will still get alerts telling them it's out of date.
          */
-        if (this.updateCheck != null) {
-            this.updateCheck.timer.cancel();
-        }
         log.info(logPrefix + "- Disabled");
     }
 

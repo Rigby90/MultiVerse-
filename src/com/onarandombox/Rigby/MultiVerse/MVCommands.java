@@ -174,18 +174,18 @@ public class MVCommands {
      */
     private void worldCreateImport(String name, String env, Player player) {
         Environment environment = null;
-        if (env.equalsIgnoreCase("NETHER")) {
-            environment = Environment.NETHER;
-        }
-
-        if (env.equalsIgnoreCase("NORMAL")) {
-            environment = Environment.NORMAL;
+        try {
+        	environment = Environment.valueOf(env);
+        } catch (IllegalArgumentException e) {
+            player.sendMessage(ChatColor.RED + "Environment type does not exist!");
+            player.sendMessage(ChatColor.RED + "Only Normal & Nether exist as Environments");
+            return;
         }
 
         if (environment == null) {
             player.sendMessage(ChatColor.RED + "Environment type does not exist!");
             player.sendMessage(ChatColor.RED + "Only Normal & Nether exist as Environments");
-            return;
+            return;    
         }
 
         if (!name.matches("[\\p{Alnum}[\\-]]*")) {
