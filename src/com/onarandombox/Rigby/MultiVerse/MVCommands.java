@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class MVCommands {
-    private MultiVerse plugin;
+    private static final String PORTAL_NAME_REGEX = "[\\p{Alnum}[\\-]]*";
+	private MultiVerse plugin;
     private MVUtils utils;
 
     private MVTeleport playerTeleporter;
@@ -79,7 +80,7 @@ public class MVCommands {
             return;
         }
         String name = args[0];
-        if (!name.matches("[\\p{Alnum}[\\-]]*")) {
+        if (!name.matches(PORTAL_NAME_REGEX)) {
             player.sendMessage(ChatColor.RED + "Portal names can only be AlphaNumeric. Eg - 'world23'");
             return;
         }
@@ -188,7 +189,7 @@ public class MVCommands {
             return;    
         }
 
-        if (!name.matches("[\\p{Alnum}[\\-]]*")) {
+        if (!name.matches(PORTAL_NAME_REGEX)) {
             player.sendMessage(ChatColor.RED + "World names can only be AlphaNumeric. Eg - 'world23'");
             return;
         }
@@ -220,7 +221,7 @@ public class MVCommands {
             return;
         }
         String name = args[0].toString();
-        if (!name.matches("[\\p{Alnum}[\\-]]*")) {
+        if (!name.matches(PORTAL_NAME_REGEX)) {
             player.sendMessage(ChatColor.RED + "World names can only be AlphaNumeric. Eg - 'world23'");
             return;
         }
@@ -251,7 +252,7 @@ public class MVCommands {
             return;
         }
         String name = split[0];
-        if (!name.matches("[\\p{Alnum}[\\-]]*")) {
+        if (!name.matches(PORTAL_NAME_REGEX)) {
             player.sendMessage(ChatColor.RED + "Portal names can only be AlphaNumeric. Eg - 'world23'");
             return;
         }
@@ -335,7 +336,7 @@ public class MVCommands {
             return;
         }
         String name = split[0];
-        if (!name.matches("[\\p{Alnum}[\\-]]*")) {
+        if (!name.matches(PORTAL_NAME_REGEX)) {
             player.sendMessage(ChatColor.RED + "Portal names can only be AlphaNumeric. Eg - 'portal23'");
             return;
         }
@@ -369,7 +370,7 @@ public class MVCommands {
         }
         String oldname = split[0];
         String newname = split[1];
-        if (!oldname.matches("[\\p{Alnum}[\\-]]*") || !newname.matches("[\\p{Alnum}[\\-]]*")) {
+        if (!oldname.matches(PORTAL_NAME_REGEX) || !newname.matches(PORTAL_NAME_REGEX)) {
             player.sendMessage(ChatColor.RED + "Portal names can only be AlphaNumeric. Eg - 'portal23'");
             return;
         }
@@ -463,7 +464,7 @@ public class MVCommands {
             return;
         }
         String name = split[0].toString();
-        if (!name.matches("[\\p{Alnum}[\\-]]*")) {
+        if (!name.matches(PORTAL_NAME_REGEX)) {
             player.sendMessage(ChatColor.RED + "Portal names can only be AlphaNumeric. Eg - 'portal23'");
             return;
         }
@@ -563,7 +564,7 @@ public class MVCommands {
                 String[] s = args[0].split(":");
                 if (s.length == 2) {
                     if (s[0].equalsIgnoreCase("P")) {
-                        if (!s[1].matches("[\\p{Alnum}[\\-]]*")) {
+                        if (!s[1].matches(PORTAL_NAME_REGEX)) {
                             player.sendMessage(ChatColor.RED + "World/Portal names can only be AlphaNumeric. Eg - 'world23'");
                             return;
                         }
@@ -576,7 +577,7 @@ public class MVCommands {
                         }
                     }
                     if (s[0].equalsIgnoreCase("W")) {
-                        if (!s[1].matches("[\\p{Alnum}[\\-]]*")) {
+                        if (!s[1].matches(PORTAL_NAME_REGEX)) {
                             player.sendMessage(ChatColor.RED + "World/Portal names can only be AlphaNumeric. Eg - 'world23'");
                             return;
                         }
@@ -586,7 +587,7 @@ public class MVCommands {
                     }
                 }
             } else {
-                if (!args[0].matches("[\\p{Alnum}[\\-]]*")) {
+                if (!args[0].matches(PORTAL_NAME_REGEX)) {
                     player.sendMessage(ChatColor.RED + "World/Portal names can only be AlphaNumeric. Eg - 'world23'");
                     return;
                 }
