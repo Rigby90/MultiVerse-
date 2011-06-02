@@ -173,18 +173,19 @@ public class MVCommands {
      * @param player
      */
     private void worldCreateImport(String name, String env, Player player) {
+        env = env.toUpperCase();
         Environment environment = null;
         try {
         	environment = Environment.valueOf(env);
         } catch (IllegalArgumentException e) {
             player.sendMessage(ChatColor.RED + "Environment type does not exist!");
-            player.sendMessage(ChatColor.RED + "Only Normal & Nether exist as Environments");
+            player.sendMessage(ChatColor.RED + "Only Normal, Nether & Skylands exist as Environments");
             return;
         }
 
         if (environment == null) {
             player.sendMessage(ChatColor.RED + "Environment type does not exist!");
-            player.sendMessage(ChatColor.RED + "Only Normal & Nether exist as Environments");
+            player.sendMessage(ChatColor.RED + "Only Normal, Nether & Skylands exist as Environments");
             return;    
         }
 
@@ -513,8 +514,10 @@ public class MVCommands {
             ChatColor color;
             if (worlds.get(i).getEnvironment() == Environment.NETHER) {
                 color = ChatColor.RED;
-            } else {
+            } else if (worlds.get(i).getEnvironment() == Environment.NORMAL) {
                 color = ChatColor.GREEN;
+            } else {
+                color = ChatColor.AQUA;
             }
 
             player.sendMessage(color + worlds.get(i).getName());
