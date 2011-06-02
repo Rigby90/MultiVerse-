@@ -513,12 +513,15 @@ public class MVCommands {
         player.sendMessage("Worlds running on this Server -");
         for (int i = 0; i < worlds.size(); i++) {
             ChatColor color;
-            if (worlds.get(i).getEnvironment() == Environment.NETHER) {
+            Environment env = worlds.get(i).getEnvironment();
+            if (env == Environment.NETHER) {
                 color = ChatColor.RED;
-            } else if (worlds.get(i).getEnvironment() == Environment.NORMAL) {
+            } else if (env == Environment.NORMAL) {
                 color = ChatColor.GREEN;
-            } else {
+            } else if (env == Environment.SKYLANDS){
                 color = ChatColor.AQUA;
+            } else {
+                color = ChatColor.WHITE;
             }
 
             player.sendMessage(color + worlds.get(i).getName());
