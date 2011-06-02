@@ -32,7 +32,6 @@ public class MVTeleport {
      * @param p
      * @return
      */
-
     public Location getPortalDestination(Location l, Player p) {
         World world = l.getWorld();
         int x = l.getBlockX();

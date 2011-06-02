@@ -323,39 +323,4 @@ public class MVPlayerListener extends PlayerListener {
             player.sendMessage("Position 2 - Set");
         }
     }
-
-    /*
-     * public void timedTeleport(final Player pl, final Location d, final int delay, final Integer
-     * price){ Timer timer = new Timer();
-     * if(this.plugin.playerSessions.get(pl.getName()).timer==false){
-     * 
-     * this.plugin.getServer().getScheduler().scheduleAsyncDelayedTask(this.plugin , new Runnable()
-     * {
-     * 
-     * public void run() { if(delay>0){ if(MultiVerse.useiConomy){ pl.sendMessage(ChatColor.RED +
-     * "Portal Cost - " + price + " " + iConomy.currency); } pl.sendMessage(ChatColor.RED +
-     * "You have " + delay + " Second(s) to leave the teleporter."); for(int i = delay; i>0; i--){
-     * pl.sendMessage(ChatColor.AQUA + "" + i + " Second(s) remaining!"); try { Thread.sleep(1000);
-     * } catch (InterruptedException e) { } } } finalCheck(pl,d,price); }
-     * 
-     * }, 0L); } this.plugin.playerSessions.get(pl.getName()).timer = true; }
-     * 
-     * public void finalCheck(final Player pl, final Location d, Integer price){ Location l =
-     * pl.getLocation(); String ptest = utils.isPortal(pl.getLocation()); if((ptest!=null)){
-     * MVPlayerSession ps = plugin.playerSessions.get(pl.getName()); ps.timer = false;
-     * ps.setTPCooldown(); ps.teleporting = true; MultiVerse.server.getPluginManager().callEvent(new
-     * PlayerMoveEvent(Event.Type.PLAYER_MOVE, pl, d, d)); pl.sendMessage(ChatColor.GREEN +
-     * "Teleportation Successful");
-     * 
-     * if(MultiVerse.useiConomy){ if (iConomy.db.get_balance(pl.getName())>price){ int balance =
-     * iConomy.db.get_balance(pl.getName()); int amount = price;
-     * iConomy.db.set_balance(pl.getName(), balance-amount); pl.sendMessage(ChatColor.RED +
-     * this.plugin.logPrefix + " You have been charged " + amount + " " + iConomy.currency); } else
-     * { if(ps.getAlertable()){
-     * pl.sendMessage("Sorry but you do not have the required funds for this portal" );
-     * ps.setAlertCooldown(); } return; } }
-     * 
-     * } else { pl.sendMessage(ChatColor.RED + "Teleportation Cancelled"); }
-     * this.plugin.playerSessions.get(pl.getName()).timer = false; }
-     */
 }
