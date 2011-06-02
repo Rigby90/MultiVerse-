@@ -66,3 +66,9 @@ commands:
   mvcoord:
     description: Display World and Coordinates
     usage: /<command>
+  mvenvironments:
+    description: Displays all valid World Environments
+    usage: /<command>
+  mvbiomes:
+    description: Displays all valid Biomes
+    usage: /<command>

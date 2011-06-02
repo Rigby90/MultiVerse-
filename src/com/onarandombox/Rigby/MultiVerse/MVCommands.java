@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
+import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
@@ -181,13 +182,13 @@ public class MVCommands {
         	environment = Environment.valueOf(env);
         } catch (IllegalArgumentException e) {
             player.sendMessage(ChatColor.RED + "Environment type does not exist!");
-            player.sendMessage(ChatColor.RED + "Only Normal, Nether & Skylands exist as Environments");
+            MVEnvironments(player);
             return;
         }
 
         if (environment == null) {
             player.sendMessage(ChatColor.RED + "Environment type does not exist!");
-            player.sendMessage(ChatColor.RED + "Only Normal, Nether & Skylands exist as Environments");
+            MVEnvironments(player);
             return;    
         }
 
@@ -242,6 +243,17 @@ public class MVCommands {
             player.sendMessage(ChatColor.RED + name + " has been removed from MultiVerse.");
             player.sendMessage(ChatColor.RED + "However it won't take effect till server restart.");
         }
+    }
+    
+    /**
+     * Tells players what the available environments are and how to spell them.
+     * @param player
+     */
+    public void MVEnvironments(Player player) {
+    	player.sendMessage(ChatColor.YELLOW + "Valid Environments are:");
+    	player.sendMessage(ChatColor.GREEN + "NORMAL");
+    	player.sendMessage(ChatColor.RED + "NETHER");
+    	player.sendMessage(ChatColor.AQUA + "SKYLANDS");
     }
 
     /**

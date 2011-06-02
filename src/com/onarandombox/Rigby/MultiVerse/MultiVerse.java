@@ -319,6 +319,16 @@ public class MultiVerse extends JavaPlugin {
             commandsMV.MVCoords(player);
             return true;
         }
+        
+        if (commandName.equalsIgnoreCase("mvbiomes")) {
+            commandsMV.MVBiomes(player);
+            return true;
+        }
+        
+        if (commandName.equalsIgnoreCase("mvenvironments")) {
+            commandsMV.MVEnvironments(player);
+            return true;
+        }
 
         commandsMV.MVHelp(player);
         return true;
