@@ -31,8 +31,8 @@ public class MVBlockListener extends BlockListener {
     }
 
     /**
-     * Event - onBlockFlow - Detect whether Water/Lava is trying to flow within
-     * a portal, if so cancel it.
+     * Event - onBlockFlow - Detect whether Water/Lava is trying to flow within a portal, if so
+     * cancel it.
      */
     @Override
     public void onBlockFromTo(BlockFromToEvent event) {
@@ -46,8 +46,7 @@ public class MVBlockListener extends BlockListener {
     }
 
     /**
-     * Event - OnBlockPlace - Check if a player is placing blocks within a
-     * portal.
+     * Event - OnBlockPlace - Check if a player is placing blocks within a portal.
      */
     @Override
     public void onBlockPlace(BlockPlaceEvent event) {
@@ -55,9 +54,8 @@ public class MVBlockListener extends BlockListener {
             return;
         }
         /**
-         * If a block is place we need to check if it was in the bounds of a
-         * portal If it was then we check if it was an admin or the owner which
-         * placed it. If not we cancel the event.
+         * If a block is place we need to check if it was in the bounds of a portal If it was then
+         * we check if it was an admin or the owner which placed it. If not we cancel the event.
          */
         String portal = utils.isPortal(event.getBlock().getLocation());
         if (portal != null) {
@@ -77,10 +75,9 @@ public class MVBlockListener extends BlockListener {
         Player player = event.getPlayer();
 
         /**
-         * If the block is destroyed we need to check whether it was apart of a
-         * portal. If it is then we need to check whether it was an owner or an
-         * admin of some sort that is destroying the blocks. If its not an admin
-         * or the owner then we cancel the event.
+         * If the block is destroyed we need to check whether it was apart of a portal. If it is
+         * then we need to check whether it was an owner or an admin of some sort that is destroying
+         * the blocks. If its not an admin or the owner then we cancel the event.
          */
         String portal = utils.isPortal(event.getBlock().getLocation());
         if (portal != null) {
@@ -92,8 +89,7 @@ public class MVBlockListener extends BlockListener {
     }
 
     /**
-     * Event - onBlockDamage - Check if a player is destroying a portal or
-     * setting coordinates.
+     * Event - onBlockDamage - Check if a player is destroying a portal or setting coordinates.
      */
     @Override
     public void onBlockDamage(BlockDamageEvent event) {
@@ -104,8 +100,8 @@ public class MVBlockListener extends BlockListener {
         Player player = event.getPlayer();
 
         /**
-         * Following section is for when the user tries to setup portal
-         * coordinates using the portal wand.
+         * Following section is for when the user tries to setup portal coordinates using the portal
+         * wand.
          */
         if (player.getItemInHand().getTypeId() == this.plugin.configMV.getInt("setwand", 270) && MultiVerse.Permissions.has(player, "multiverse.portal.create")) {
             String[] whitelist = this.plugin.configMV.getString("portalblocks", "").split(",");
@@ -129,8 +125,8 @@ public class MVBlockListener extends BlockListener {
          */
 
         /**
-         * Following section is for when the user tries to gain information on a
-         * portal by hitting it with the info wand.
+         * Following section is for when the user tries to gain information on a portal by hitting
+         * it with the info wand.
          */
         if (player.getItemInHand().getTypeId() == this.plugin.configMV.getInt("infowand", 49) && event.getBlock().getTypeId() == 49) {
             if (!this.plugin.playerSessions.get(player.getName()).isInfoSendable()) {

@@ -26,8 +26,7 @@ public class MVTeleport {
     }
 
     /**
-     * This function gets a safe place to teleport to when teleporting to a
-     * Portal.
+     * This function gets a safe place to teleport to when teleporting to a Portal.
      * 
      * @param l
      * @param p
@@ -104,8 +103,7 @@ public class MVTeleport {
     }
 
     /**
-     * This function checks whether the block at the given coordinates are above
-     * air or not.
+     * This function checks whether the block at the given coordinates are above air or not.
      * 
      * @param world
      * @param x
@@ -118,8 +116,8 @@ public class MVTeleport {
     }
 
     /**
-     * This function checks whether the block at the coordinates given is safe
-     * or not by checking for Laval/Fire/Air etc.
+     * This function checks whether the block at the coordinates given is safe or not by checking
+     * for Laval/Fire/Air etc.
      * 
      * @param world
      * @param x
@@ -148,8 +146,8 @@ public class MVTeleport {
     }
 
     /**
-     * Check whether it is a Portal and then find out if it has a destination.
-     * If it does we need to return the location or Null.
+     * Check whether it is a Portal and then find out if it has a destination. If it does we need to
+     * return the location or Null.
      * 
      * @param pl
      * @param ptest
@@ -198,8 +196,8 @@ public class MVTeleport {
     }
 
     /**
-     * This is ran if no portal is found, we check if there's a sign nearby and
-     * use that to find the destination.
+     * This is ran if no portal is found, we check if there's a sign nearby and use that to find the
+     * destination.
      * 
      * @param pl
      * @return
@@ -236,8 +234,8 @@ public class MVTeleport {
     }
 
     /**
-     * This is ran if a Portal is Found and no destination has been assigned
-     * yet. The server also has to have "splike" enabled.
+     * This is ran if a Portal is Found and no destination has been assigned yet. The server also
+     * has to have "splike" enabled.
      * 
      * @param pl
      * @return
@@ -366,8 +364,8 @@ public class MVTeleport {
     }
 
     /**
-     * Check if a Player can teleport to the Destination world from there
-     * current world. This checks against the Worlds Blacklist
+     * Check if a Player can teleport to the Destination world from there current world. This checks
+     * against the Worlds Blacklist
      * 
      * @param p
      * @param w

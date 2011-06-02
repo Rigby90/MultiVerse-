@@ -8,14 +8,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
-import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class MVCommands {
-	private static final String PORTAL_NAME_REGEX = "[\\p{Alnum}[\\-]]*";
-	private static final String WORLD_NAME_REGEX = "[\\p{Alnum}_[\\-]]*";
-	private MultiVerse plugin;
+    private static final String PORTAL_NAME_REGEX = "[\\p{Alnum}[\\-]]*";
+    private static final String WORLD_NAME_REGEX = "[\\p{Alnum}_[\\-]]*";
+    private MultiVerse plugin;
     private MVUtils utils;
 
     private MVTeleport playerTeleporter;
@@ -49,8 +48,7 @@ public class MVCommands {
     }
 
     /**
-     * Create a new World and add it to the setup.
-     * allow for Generator Support.
+     * Create a new World and add it to the setup. allow for Generator Support.
      * 
      * @param player
      * @param args
@@ -168,8 +166,8 @@ public class MVCommands {
     }
 
     /**
-     * Function which is called by MVCreate and MVImport in order to add the
-     * Worlds to the Server and to MultiVerse configs.
+     * Function which is called by MVCreate and MVImport in order to add the Worlds to the Server
+     * and to MultiVerse configs.
      * 
      * @param name
      * @param env
@@ -179,7 +177,7 @@ public class MVCommands {
         env = env.toUpperCase();
         Environment environment = null;
         try {
-        	environment = Environment.valueOf(env);
+            environment = Environment.valueOf(env);
         } catch (IllegalArgumentException e) {
             player.sendMessage(ChatColor.RED + "Environment type does not exist!");
             MVEnvironments(player);
@@ -189,27 +187,27 @@ public class MVCommands {
         if (environment == null) {
             player.sendMessage(ChatColor.RED + "Environment type does not exist!");
             MVEnvironments(player);
-            return;    
+            return;
         }
 
         if (!name.matches(WORLD_NAME_REGEX)) {
             player.sendMessage(ChatColor.RED + "World names can only be AlphaNumeric. Eg - 'world23_nether'");
             return;
         }
-        if(!this.plugin.MVWorlds.containsKey(name)) {
-        	World world;
-        	if(this.plugin.getServer().getWorld(name) == null) {
+        if (!this.plugin.MVWorlds.containsKey(name)) {
+            World world;
+            if (this.plugin.getServer().getWorld(name) == null) {
                 this.plugin.getServer().broadcastMessage(ChatColor.RED + "Attempting to create a new World");
                 world = this.plugin.getServer().createWorld(name, environment);
-            	log.info("[MultiVerse] " + name + " - World Created as - " + env.toString());
-        	} else {
-        		world = this.plugin.getServer().getWorld(name);
-        		log.info("[MultiVerse] " + name + " - World Imported as - " + env.toString());
-                
-        	}
-        	this.plugin.MVWorlds.put(world.getName(), new MVWorld(world, this.plugin.configWorlds, this.plugin));
+                log.info("[MultiVerse] " + name + " - World Created as - " + env.toString());
+            } else {
+                world = this.plugin.getServer().getWorld(name);
+                log.info("[MultiVerse] " + name + " - World Imported as - " + env.toString());
+
+            }
+            this.plugin.MVWorlds.put(world.getName(), new MVWorld(world, this.plugin.configWorlds, this.plugin));
             this.plugin.MVWorlds.get(world.getName()).saveAll();
-        	this.plugin.getServer().broadcastMessage(ChatColor.GREEN + "Complete");
+            this.plugin.getServer().broadcastMessage(ChatColor.GREEN + "Complete");
         } else {
             player.sendMessage(ChatColor.RED + "A World with that name already exists.");
         }
@@ -244,21 +242,21 @@ public class MVCommands {
             player.sendMessage(ChatColor.RED + "However it won't take effect till server restart.");
         }
     }
-    
+
     /**
      * Tells players what the available environments are and how to spell them.
+     * 
      * @param player
      */
     public void MVEnvironments(Player player) {
-    	player.sendMessage(ChatColor.YELLOW + "Valid Environments are:");
-    	player.sendMessage(ChatColor.GREEN + "NORMAL");
-    	player.sendMessage(ChatColor.RED + "NETHER");
-    	player.sendMessage(ChatColor.AQUA + "SKYLANDS");
+        player.sendMessage(ChatColor.YELLOW + "Valid Environments are:");
+        player.sendMessage(ChatColor.GREEN + "NORMAL");
+        player.sendMessage(ChatColor.RED + "NETHER");
+        player.sendMessage(ChatColor.AQUA + "SKYLANDS");
     }
 
     /**
-     * Create a new portal from the coordinates given. TODO: Permissions... and
-     * everything else...
+     * Create a new portal from the coordinates given. TODO: Permissions... and everything else...
      * 
      * @param player
      * @param split
@@ -307,7 +305,7 @@ public class MVCommands {
 
         ps.setSelectedPortal(name);
         this.plugin.MVPortals.put(name, new MVPortal(name, this.plugin.configPortals, this.plugin));
-        
+
         this.plugin.MVPortals.get(name).setLocation(player.getWorld(), v[0], v[1]);
         this.plugin.MVPortals.get(name).setOwner(player.getName());
 
@@ -534,7 +532,7 @@ public class MVCommands {
                 color = ChatColor.RED;
             } else if (env == Environment.NORMAL) {
                 color = ChatColor.GREEN;
-            } else if (env == Environment.SKYLANDS){
+            } else if (env == Environment.SKYLANDS) {
                 color = ChatColor.AQUA;
             } else {
                 color = ChatColor.WHITE;
@@ -570,8 +568,8 @@ public class MVCommands {
     }
 
     /**
-     * Teleport the player to the World or Portal they specify.
-     * TODO: Permissions, can a user teleport to that world, blacklists/whitelist
+     * Teleport the player to the World or Portal they specify. TODO: Permissions, can a user
+     * teleport to that world, blacklists/whitelist
      * 
      * @param player
      * @param args
@@ -644,8 +642,8 @@ public class MVCommands {
     }
 
     /**
-     * Output help to the player. TODO: Need to implement permissions, only
-     * display commands the player can actually use.
+     * Output help to the player. TODO: Need to implement permissions, only display commands the
+     * player can actually use.
      * 
      * @param player
      */

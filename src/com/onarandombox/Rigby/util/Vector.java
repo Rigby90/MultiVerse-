@@ -38,8 +38,7 @@ public class Vector {
     public Vector setZ(int z) {
         return new Vector(x, y, z);
     }
- 
-    
+
     /**
      * Get the distance away from a point.
      * 
@@ -47,9 +46,7 @@ public class Vector {
      * @return distance
      */
     public double distance(Vector pt) {
-        return Math.sqrt(Math.pow(pt.x - x, 2) +
-                Math.pow(pt.y - y, 2) +
-                Math.pow(pt.z - z, 2));
+        return Math.sqrt(Math.pow(pt.x - x, 2) + Math.pow(pt.y - y, 2) + Math.pow(pt.z - z, 2));
     }
 
     /**
@@ -60,8 +57,6 @@ public class Vector {
      * @return
      */
     public boolean containedWithin(Vector min, Vector max) {
-        return x >= min.getX() && x <= max.getX()
-                && y >= min.getY() && y <= max.getY()
-                && z >= min.getZ() && z <= max.getZ();
+        return x >= min.getX() && x <= max.getX() && y >= min.getY() && y <= max.getY() && z >= min.getZ() && z <= max.getZ();
     }
 }

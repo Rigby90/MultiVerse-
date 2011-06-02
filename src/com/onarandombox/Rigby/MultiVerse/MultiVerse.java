@@ -24,25 +24,25 @@ import com.nijiko.permissions.PermissionHandler;
 @SuppressWarnings("unused")
 public class MultiVerse extends JavaPlugin {
     /**
-     * Variable to contain the CraftBukkit version which this was made for and
-     * servers should not use anything less than this.
+     * Variable to contain the CraftBukkit version which this was made for and servers should not
+     * use anything less than this.
      */
     private final int CBVer = 320;
     /**
-     * Variables to contain checks on the external plugins, so far this is just
-     * Permissions and iConomy. Permissions is REQUIRED.
+     * Variables to contain checks on the external plugins, so far this is just Permissions and
+     * iConomy. Permissions is REQUIRED.
      */
     public static PermissionHandler Permissions;
     public static boolean useiConomy = false;
     /**
-     * Setup the Logger, also set a public variable which contains the prefix
-     * for all log messages, this allows for easy change.
+     * Setup the Logger, also set a public variable which contains the prefix for all log messages,
+     * this allows for easy change.
      */
     private final Logger log = Logger.getLogger("Minecraft");
     public final String logPrefix = "[MultiVerse] ";
     /**
-     * Setup all the Configuration variables... first 3 are actual config files
-     * to read write to, 4 one is the process we run to setup the initial files.
+     * Setup all the Configuration variables... first 3 are actual config files to read write to, 4
+     * one is the process we run to setup the initial files.
      */
     public Configuration configMV;
     public Configuration configWorlds;
@@ -54,14 +54,13 @@ public class MultiVerse extends JavaPlugin {
     public MVUtils utils = new MVUtils(this);
     private MVCommands commandsMV = new MVCommands(this);
     /**
-     * HashMaps to contain the current Worlds and Portals loaded into
-     * MultiVerse.
+     * HashMaps to contain the current Worlds and Portals loaded into MultiVerse.
      */
     public HashMap<String, MVWorld> MVWorlds = new HashMap<String, MVWorld>();
     public HashMap<String, MVPortal> MVPortals = new HashMap<String, MVPortal>();
     /**
-     * HashMap to contain all player session related stuff, eg what coordinates
-     * they have selected or what portal they have selected.
+     * HashMap to contain all player session related stuff, eg what coordinates they have selected
+     * or what portal they have selected.
      */
     public HashMap<String, MVPlayerSession> playerSessions = new HashMap<String, MVPlayerSession>();
     /**
@@ -97,9 +96,8 @@ public class MultiVerse extends JavaPlugin {
          */
         log.info(logPrefix + "- Version " + this.getDescription().getVersion() + " Enabled");
         /**
-         * First we run our 'confSetup' class to check if the Configuration
-         * files exist. If either of them is missing it will create it with a
-         * empty template.
+         * First we run our 'confSetup' class to check if the Configuration files exist. If either
+         * of them is missing it will create it with a empty template.
          */
         confSetup.setupConfigs();
         /**
@@ -107,21 +105,20 @@ public class MultiVerse extends JavaPlugin {
          */
         configMV.load();
         /**
-         * Check whether iConomy is enabled, then check whether they want
-         * players to be charged for using Portals.
+         * Check whether iConomy is enabled, then check whether they want players to be charged for
+         * using Portals.
          */
         if (checkiConomy()) {
             useiConomy = configMV.getBoolean("iconomy", false);
         }
         /**
-         * Since we have everything we need to run the plugin we can now load
-         * the config files.
+         * Since we have everything we need to run the plugin we can now load the config files.
          */
         configWorlds.load();
         configPortals.load();
         /**
-         * Now we run the functions to place each world and portal into our
-         * HashMap with our Custom Class.
+         * Now we run the functions to place each world and portal into our HashMap with our Custom
+         * Class.
          */
         loadWorlds();
         loadPortals();
@@ -152,8 +149,7 @@ public class MultiVerse extends JavaPlugin {
     }
 
     /**
-     * When a command is run this Function will process it and perform the
-     * appropriate action.
+     * When a command is run this Function will process it and perform the appropriate action.
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
@@ -319,7 +315,7 @@ public class MultiVerse extends JavaPlugin {
             commandsMV.MVCoords(player);
             return true;
         }
-        
+
         if (commandName.equalsIgnoreCase("mvenvironments")) {
             commandsMV.MVEnvironments(player);
             return true;
@@ -330,8 +326,8 @@ public class MultiVerse extends JavaPlugin {
     }
 
     /**
-     * This section is run once when the Plugin is enabled, this will load all
-     * the Worlds and place them into the HashMap & Custom Class.
+     * This section is run once when the Plugin is enabled, this will load all the Worlds and place
+     * them into the HashMap & Custom Class.
      */
     public void loadWorlds() {
         /**
@@ -339,18 +335,16 @@ public class MultiVerse extends JavaPlugin {
          */
         int count = 0;
         /**
-         * Grab all the Worlds from the 'worlds.yml' we already loaded this file
-         * into 'configWorlds' during the onEnable stage.
+         * Grab all the Worlds from the 'worlds.yml' we already loaded this file into 'configWorlds'
+         * during the onEnable stage.
          */
         List<String> worldKeys = this.configWorlds.getKeys("worlds");
         /**
-         * If we have no Worlds listed in the file then we can skip the
-         * following.
+         * If we have no Worlds listed in the file then we can skip the following.
          */
         if (worldKeys != null) {
             /**
-             * For each entry within the List of Worlds we perform the
-             * following.
+             * For each entry within the List of Worlds we perform the following.
              */
             for (String worldKey : worldKeys) {
                 /**
@@ -377,24 +371,22 @@ public class MultiVerse extends JavaPlugin {
                  */
                 Boolean pvp = this.configWorlds.getBoolean("worlds." + worldKey + ".pvp", true);
                 /**
-                 * We need to take the Environment type and grab the real
-                 * environment ENUM.
+                 * We need to take the Environment type and grab the real environment ENUM.
                  */
                 Environment env;
                 try {
-                	env = Environment.valueOf(wEnvironment);
+                    env = Environment.valueOf(wEnvironment);
                 } catch (IllegalArgumentException e) {
-                	log.info(logPrefix + "'" + worldKey + "' - " + wEnvironment + " - Invalid Environment Type");
-                	continue;
+                    log.info(logPrefix + "'" + worldKey + "' - " + wEnvironment + " - Invalid Environment Type");
+                    continue;
                 }
                 /**
-                 * Output that we are loading a world with a specific
-                 * environment type.
+                 * Output that we are loading a world with a specific environment type.
                  */
                 log.info(logPrefix + "Loading World & Settings - '" + worldKey + "' - " + wEnvironment);
                 /**
-                 * Tell the server to create the world then place it within a
-                 * variable so we can pass this onto our HashMap.
+                 * Tell the server to create the world then place it within a variable so we can
+                 * pass this onto our HashMap.
                  */
                 World world = this.getServer().createWorld(worldKey, env);
                 /**
@@ -404,9 +396,9 @@ public class MultiVerse extends JavaPlugin {
                 ((CraftWorld) world).getHandle().allowAnimals = animals;
                 ((CraftWorld) world).getHandle().pvpMode = pvp;
                 /**
-                 * Place the World into hour HashMap with our Custom Class, the
-                 * custom class also gets passed along the config file so it can
-                 * edit it and save it, as well as this class.
+                 * Place the World into hour HashMap with our Custom Class, the custom class also
+                 * gets passed along the config file so it can edit it and save it, as well as this
+                 * class.
                  */
                 MVWorlds.put(worldKey, new MVWorld(world, this.configWorlds, this));
                 /**
@@ -416,9 +408,8 @@ public class MultiVerse extends JavaPlugin {
             }
         }
         /**
-         * If the config file does not contain our default world then we will
-         * load it anyways this is needed because all commands based on Worlds
-         * are checked via the HashMap.
+         * If the config file does not contain our default world then we will load it anyways this
+         * is needed because all commands based on Worlds are checked via the HashMap.
          */
         if (!this.MVWorlds.containsKey(getServer().getWorlds().get(0).getName())) {
             /**
@@ -434,9 +425,8 @@ public class MultiVerse extends JavaPlugin {
              */
             String location = this.utils.locationToString(world.getSpawnLocation());
             /**
-             * Place the World into our HashMap and then force a save of the
-             * config file, this makes it so the default world and it's settings
-             * are then saved into the config.
+             * Place the World into our HashMap and then force a save of the config file, this makes
+             * it so the default world and it's settings are then saved into the config.
              */
             this.MVWorlds.put(world.getName(), new MVWorld(world, this.configWorlds, this));
             this.MVWorlds.get(world.getName()).setMobSpawn(((CraftWorld) world).getHandle().allowMonsters);
@@ -455,8 +445,8 @@ public class MultiVerse extends JavaPlugin {
     }
 
     /**
-     * This section is run once when the Plugin is enabled, this will load all
-     * the Portals and place them into the HashMap & Custom Class.
+     * This section is run once when the Plugin is enabled, this will load all the Portals and place
+     * them into the HashMap & Custom Class.
      */
     private void loadPortals() {
         /**
@@ -479,13 +469,12 @@ public class MultiVerse extends JavaPlugin {
          */
         int count = 0;
         /**
-         * Loop through all the entries within the list and load the settings
-         * into our HashMap with its Custom Class.
+         * Loop through all the entries within the list and load the settings into our HashMap with
+         * its Custom Class.
          */
         for (String portalKey : portalKeys) {
             /**
-             * Key = Portal name and we pass along the config file and this
-             * class.
+             * Key = Portal name and we pass along the config file and this class.
              */
             String world = this.configPortals.getString("portals." + portalKey + ".world");
             if (getServer().getWorld(world) != null) {
@@ -529,16 +518,16 @@ public class MultiVerse extends JavaPlugin {
     }
 
     /**
-     * Simple Script which runs when the Plugin is disabled... Currently we just
-     * use this to output to the user the fact it's disabled and to stop the
-     * updateChecker if one was initialised. We can't unregister events atm.
+     * Simple Script which runs when the Plugin is disabled... Currently we just use this to output
+     * to the user the fact it's disabled and to stop the updateChecker if one was initialised. We
+     * can't unregister events atm.
      */
     @Override
     public void onDisable() {
         /**
-         * If updateCheck is NOT NULL then it means we have enabled Update
-         * Checking, this needs to be cancelled otherwise even though the plugin
-         * is disabled they will still get alerts telling them it's out of date.
+         * If updateCheck is NOT NULL then it means we have enabled Update Checking, this needs to
+         * be cancelled otherwise even though the plugin is disabled they will still get alerts
+         * telling them it's out of date.
          */
         log.info(logPrefix + "- Disabled");
     }

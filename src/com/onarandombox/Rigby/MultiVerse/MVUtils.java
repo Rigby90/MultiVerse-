@@ -80,8 +80,8 @@ public class MVUtils {
     }
 
     /**
-     * For servers that want to play with legit portals, we need to check that 6
-     * portal pieces exist.
+     * For servers that want to play with legit portals, we need to check that 6 portal pieces
+     * exist.
      * 
      * @param coords
      * @return
@@ -122,8 +122,7 @@ public class MVUtils {
     }
 
     /**
-     * Build a Portal, work out the Direction first then pass it on to the
-     * relevant function.
+     * Build a Portal, work out the Direction first then pass it on to the relevant function.
      * 
      * @param player
      * @param offset
@@ -233,8 +232,7 @@ public class MVUtils {
     }
 
     /**
-     * Take the players location and returns direction in the form of - N S E W
-     * - NE NW SE SW
+     * Take the players location and returns direction in the form of - N S E W - NE NW SE SW
      * 
      * @param player
      * @return
@@ -266,8 +264,7 @@ public class MVUtils {
     }
 
     /**
-     * Check to see if the block we are smacking about is actually part of a
-     * portal.
+     * Check to see if the block we are smacking about is actually part of a portal.
      * 
      * @param location
      * @return

@@ -104,8 +104,8 @@ public class MVPlayerSession {
     }
 
     /**
-     * Compare the current time against the last time used and determine whether
-     * they can use a portal again.
+     * Compare the current time against the last time used and determine whether they can use a
+     * portal again.
      * 
      * @param player
      * @return
@@ -134,8 +134,8 @@ public class MVPlayerSession {
     }
 
     /**
-     * Send a Message to the user, this function allows us to send messages to
-     * the user without spamming them more than once per 2 seconds.
+     * Send a Message to the user, this function allows us to send messages to the user without
+     * spamming them more than once per 2 seconds.
      * 
      * @param t
      */
