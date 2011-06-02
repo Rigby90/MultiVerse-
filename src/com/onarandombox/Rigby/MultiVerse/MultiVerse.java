@@ -320,11 +320,6 @@ public class MultiVerse extends JavaPlugin {
             return true;
         }
         
-        if (commandName.equalsIgnoreCase("mvbiomes")) {
-            commandsMV.MVBiomes(player);
-            return true;
-        }
-        
         if (commandName.equalsIgnoreCase("mvenvironments")) {
             commandsMV.MVEnvironments(player);
             return true;
