@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class MVCommands {
-    private static final String PORTAL_NAME_REGEX = "[\\p{Alnum}[\\-]]*";
+	private static final String PORTAL_NAME_REGEX = "[\\p{Alnum}[\\-]]*";
+	private static final String WORLD_NAME_REGEX = "[\\p{Alnum}_[\\-]]*";
 	private MultiVerse plugin;
     private MVUtils utils;
 
@@ -190,18 +191,24 @@ public class MVCommands {
             return;    
         }
 
-        if (!name.matches(PORTAL_NAME_REGEX)) {
-            player.sendMessage(ChatColor.RED + "World names can only be AlphaNumeric. Eg - 'world23'");
+        if (!name.matches(WORLD_NAME_REGEX)) {
+            player.sendMessage(ChatColor.RED + "World names can only be AlphaNumeric. Eg - 'world23_nether'");
             return;
         }
-
-        if (!(this.plugin.getServer().getWorld(name) != null)) {
-            this.plugin.getServer().broadcastMessage(ChatColor.RED + "Attempting to create a new World");
-            World world = this.plugin.getServer().createWorld(name, environment);
-            this.plugin.MVWorlds.put(world.getName(), new MVWorld(world, this.plugin.configWorlds, this.plugin));
+        if(!this.plugin.MVWorlds.containsKey(name)) {
+        	World world;
+        	if(this.plugin.getServer().getWorld(name) == null) {
+                this.plugin.getServer().broadcastMessage(ChatColor.RED + "Attempting to create a new World");
+                world = this.plugin.getServer().createWorld(name, environment);
+            	log.info("[MultiVerse] " + name + " - World Created as - " + env.toString());
+        	} else {
+        		world = this.plugin.getServer().getWorld(name);
+        		log.info("[MultiVerse] " + name + " - World Imported as - " + env.toString());
+                
+        	}
+        	this.plugin.MVWorlds.put(world.getName(), new MVWorld(world, this.plugin.configWorlds, this.plugin));
             this.plugin.MVWorlds.get(world.getName()).saveAll();
-            this.plugin.getServer().broadcastMessage(ChatColor.GREEN + "Complete");
-            log.info("[MultiVerse] " + name + " - World Created as - " + env.toString());
+        	this.plugin.getServer().broadcastMessage(ChatColor.GREEN + "Complete");
         } else {
             player.sendMessage(ChatColor.RED + "A World with that name already exists.");
         }
@@ -222,8 +229,8 @@ public class MVCommands {
             return;
         }
         String name = args[0].toString();
-        if (!name.matches(PORTAL_NAME_REGEX)) {
-            player.sendMessage(ChatColor.RED + "World names can only be AlphaNumeric. Eg - 'world23'");
+        if (!name.matches(WORLD_NAME_REGEX)) {
+            player.sendMessage(ChatColor.RED + "World names can only be AlphaNumeric. Eg - 'world23_nether'");
             return;
         }
         if (!this.plugin.MVWorlds.containsKey(name)) {
@@ -571,7 +578,7 @@ public class MVCommands {
                 if (s.length == 2) {
                     if (s[0].equalsIgnoreCase("P")) {
                         if (!s[1].matches(PORTAL_NAME_REGEX)) {
-                            player.sendMessage(ChatColor.RED + "World/Portal names can only be AlphaNumeric. Eg - 'world23'");
+                            player.sendMessage(ChatColor.RED + "Portal names can only be AlphaNumeric. Eg - 'world23'");
                             return;
                         }
                         if (this.plugin.MVPortals.containsKey(s[1].toString())) {
@@ -583,8 +590,8 @@ public class MVCommands {
                         }
                     }
                     if (s[0].equalsIgnoreCase("W")) {
-                        if (!s[1].matches(PORTAL_NAME_REGEX)) {
-                            player.sendMessage(ChatColor.RED + "World/Portal names can only be AlphaNumeric. Eg - 'world23'");
+                        if (!s[1].matches(WORLD_NAME_REGEX)) {
+                            player.sendMessage(ChatColor.RED + "World names can only be AlphaNumeric. Eg - 'world23_nether'");
                             return;
                         }
                         w = this.plugin.getServer().getWorld(s[1].toString());
@@ -593,8 +600,8 @@ public class MVCommands {
                     }
                 }
             } else {
-                if (!args[0].matches(PORTAL_NAME_REGEX)) {
-                    player.sendMessage(ChatColor.RED + "World/Portal names can only be AlphaNumeric. Eg - 'world23'");
+                if (!args[0].matches(WORLD_NAME_REGEX)) {
+                    player.sendMessage(ChatColor.RED + "World names can only be AlphaNumeric. Eg - 'world23'");
                     return;
                 }
                 w = this.plugin.getServer().getWorld(args[0].toString());
