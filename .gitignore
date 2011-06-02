@@ -1,6 +1,26 @@
-.DS_Store
-.classpath
+# Eclipse stuff
+/.externalToolBuilders
+/.settings
+/.gitignore
 .project
-.settings/
-manifest
-bin/
+.classpath
+
+
+/nbproject
+
+/build.xml
+
+/target
+
+.*.sw[a-p]
+
+# various other potential build files
+/build
+/bin
+/dist
+/manifest.mf
+
+/world
+
+# Mac filesystem dust
+/.DS_Store
