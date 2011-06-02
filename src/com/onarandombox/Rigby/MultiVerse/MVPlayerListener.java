@@ -170,6 +170,7 @@ public class MVPlayerListener extends PlayerListener {
              * Check whether the Alias for the world is not empty and is longer
              * than 0 Letters. If so we apply it to the 'prefix' String.
              */
+            // TODO: Check World exists first.
             if (this.plugin.MVWorlds.get(world).getAlias() != "" && this.plugin.MVWorlds.get(world).getAlias().length() > 0) {
                 prefix = this.plugin.MVWorlds.get(world).getAlias();
             }

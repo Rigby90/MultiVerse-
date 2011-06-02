@@ -348,6 +348,10 @@ public class MultiVerse extends JavaPlugin {
              * following.
              */
             for (String worldKey : worldKeys) {
+                
+                // TODO: CHECK VALID NAME, ATTEMPT TO CREATE FOLDER WITH NAME. IF SUCCESSFUL WE ALLOW IF NOT WE SKIP.
+                // SAME NEEDS TO BE DONE WITHIN COMMANDS ETC.
+                
                 /**
                  * Grab the Environment type - Normal/Nether - Default = Normal
                  */
