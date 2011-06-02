@@ -1,7 +1,7 @@
 name: MultiVerse
 main: com.onarandombox.Rigby.MultiVerse.MultiVerse
 author: Rigby
-version: 1.6.5
+version: 1.7.1
 commands:
   mvcreate:
     description: World create command
