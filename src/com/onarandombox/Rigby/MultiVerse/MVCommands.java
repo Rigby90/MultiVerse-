@@ -48,7 +48,7 @@ public class MVCommands {
     }
 
     /**
-     * Create a new World and add it to the setup. TODO: When Bukkit is updated
+     * Create a new World and add it to the setup.
      * allow for Generator Support.
      * 
      * @param player
@@ -215,8 +215,7 @@ public class MVCommands {
     }
 
     /**
-     * Remove the specified World from MultiVerse configuration. TODO: Waiting
-     * for .unloadWorld(World) to unload the World from memory.
+     * Remove the specified World from MultiVerse configuration.
      * 
      * @param player
      * @param args
@@ -461,7 +460,7 @@ public class MVCommands {
     }
 
     /**
-     * Set the users selected Portal TODO: Add permissions
+     * Set the users selected Portal
      * 
      * @param player
      * @param split
@@ -509,9 +508,7 @@ public class MVCommands {
     }
 
     /**
-     * Print the current loaded Worlds to the player TODO: Add permission based
-     * reporting, if a user can go to the world then they can view it in the
-     * list.
+     * Print the current loaded Worlds to the player
      * 
      * @param player
      */
@@ -542,7 +539,6 @@ public class MVCommands {
      * @param args
      */
     public void MVSetSpawn(Player player, String[] args) {
-        // TODO: Sort this out more... permissions etc...
         World w = player.getWorld();
         this.plugin.MVWorlds.get(w.getName()).setSpawnLocation(player.getLocation());
         player.sendMessage(w.getName() + " - Spawn Set");
@@ -562,9 +558,8 @@ public class MVCommands {
     }
 
     /**
-     * Teleport the player to the World or Portal they specify. TODO:
-     * Permissions, can a user teleport to that world, blacklists/whitelist
-     * etc...
+     * Teleport the player to the World or Portal they specify.
+     * TODO: Permissions, can a user teleport to that world, blacklists/whitelist
      * 
      * @param player
      * @param args
@@ -621,21 +616,12 @@ public class MVCommands {
             return;
         }
         if (l != null && l.getWorld() != null) {
-            // if(!(playerTeleporter.canEnterWorld(player,l.getWorld()))){
-            // plugin.playerSessions.get(player.getName()).sendMessage("Sorry but you cannot enter this World");
-            // return;
-            // }
-
-            // TODO : Fix this...
-            // plugin.playerSessions.get(player.getName()).teleporting = true;
-            // MultiVerse.server.getPluginManager().callEvent(new
-            // PlayerMoveEvent(Event.Type.PLAYER_MOVE, player, l, l));
             player.teleport(l);
         }
     }
 
     /**
-     * Teleport a player to a world. TODO: Whole thing :).
+     * Teleport a player to a world.
      * 
      * @param player
      * @param split
