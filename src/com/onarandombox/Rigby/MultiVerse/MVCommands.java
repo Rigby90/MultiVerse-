@@ -89,8 +89,8 @@ public class MVCommands {
             return;
         }
         String name = args[0];
-        if (!name.matches(PORTAL_NAME_REGEX)) {
-            player.sendMessage(ChatColor.RED + "Portal names can only be AlphaNumeric. Eg - 'world23'");
+        if (!name.matches(WORLD_NAME_REGEX)) {
+            player.sendMessage(ChatColor.RED + "World names can only be AlphaNumeric. Eg - 'world23_nether'");
             return;
         }
         if (!this.plugin.MVWorlds.containsKey(name)) {
