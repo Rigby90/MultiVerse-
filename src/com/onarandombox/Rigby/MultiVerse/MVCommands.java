@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 
 public class MVCommands {
     private static final String PORTAL_NAME_REGEX = "[\\p{Alnum}[\\-]]*";
-    private static final String WORLD_NAME_REGEX = "[\\p{Alnum}_[\\-]]*";
+    public static final String WORLD_NAME_REGEX = "[\\p{Alnum}_[\\-]]*";
     private MultiVerse plugin;
     private MVUtils utils;
 
@@ -44,7 +44,7 @@ public class MVCommands {
             player.sendMessage(ChatColor.RED + "World doesn't exist, stopping import!");
             return;
         }
-        worldCreateImport(args[0].toString(), args[1].toString(), player);
+        worldCreateImport(args[0].toString(), args[1].toString(), player, null);
     }
 
     /**
@@ -54,18 +54,27 @@ public class MVCommands {
      * @param args
      */
     public void MVCreate(Player player, String[] args) {
-        if (args.length != 2) {
+        if (args.length < 2) {
             player.sendMessage("Not enough parameters to create a new world");
             player.sendMessage(ChatColor.RED + "/mvcreate WORLDNAME ENVIRONMENT - Create a new World.");
             player.sendMessage(ChatColor.RED + "Example - /mvcreate hellworld nether");
             return;
+        } else if(args.length > 3) {
+        	player.sendMessage("Too many parameters to create a new world");
+            player.sendMessage(ChatColor.RED + "/mvcreate WORLDNAME ENVIRONMENT - Create a new World.");
+            player.sendMessage(ChatColor.RED + "Example - /mvcreate hellworld nether");
         }
         if (new File(args[0].toString()).exists()) {
             player.sendMessage(ChatColor.RED + "A Folder/World already exists with this name!");
             player.sendMessage(ChatColor.RED + "If you are confident it is a world you can import with /mvimport");
             return;
         }
-        worldCreateImport(args[0].toString(), args[1].toString(), player);
+        if(args.length > 2) {
+        	worldCreateImport(args[0].toString(), args[1].toString(), player, args[2]);
+        } else {
+        	worldCreateImport(args[0].toString(), args[1].toString(), player, null);
+        }
+        
     }
 
     /**
@@ -173,7 +182,7 @@ public class MVCommands {
      * @param env
      * @param player
      */
-    private void worldCreateImport(String name, String env, Player player) {
+    private void worldCreateImport(String name, String env, Player player, String seed) {
         env = env.toUpperCase();
         Environment environment = null;
         try {
@@ -197,8 +206,20 @@ public class MVCommands {
         if (!this.plugin.MVWorlds.containsKey(name)) {
             World world;
             if (this.plugin.getServer().getWorld(name) == null) {
-                this.plugin.getServer().broadcastMessage(ChatColor.RED + "Attempting to create a new World");
-                world = this.plugin.getServer().createWorld(name, environment);
+            	if(seed == null) {
+					this.plugin.getServer().broadcastMessage(ChatColor.RED + "Attempting to create a new World");
+					
+					world = this.plugin.getServer().createWorld(name, environment);
+            	} else {
+            		Long seedLong;
+            		try {
+                        seedLong = Long.parseLong(seed);
+                    } catch (NumberFormatException e) {
+                        seedLong = (long) seed.hashCode();
+                    }
+                    world = this.plugin.getServer().createWorld(name, environment, seedLong);
+            	}
+                
                 log.info("[MultiVerse] " + name + " - World Created as - " + env.toString());
             } else {
                 world = this.plugin.getServer().getWorld(name);
