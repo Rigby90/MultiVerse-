@@ -4,10 +4,12 @@ import java.io.File;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
+import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
@@ -257,11 +259,11 @@ public class MVCommands {
             player.sendMessage(ChatColor.RED + "World doesn't exist!");
             return;
         } else {
+            ((CraftServer) this.plugin.getServer()).unloadWorld(name);
             this.plugin.MVWorlds.remove(name);
             this.plugin.configWorlds.removeProperty("worlds." + name);
             this.plugin.configWorlds.save();
-            player.sendMessage(ChatColor.RED + name + " has been removed from MultiVerse.");
-            player.sendMessage(ChatColor.RED + "However it won't take effect till server restart.");
+            player.sendMessage(ChatColor.RED + name + " has been unloaded.");
         }
     }
 
@@ -563,7 +565,7 @@ public class MVCommands {
             player.sendMessage(color + worlds.get(i).getName());
         }
     }
-
+    
     /**
      * Set the Worlds spawn location to the players current location.
      * 
