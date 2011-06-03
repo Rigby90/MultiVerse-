@@ -211,6 +211,7 @@ public class MVCommands {
 					
 					world = this.plugin.getServer().createWorld(name, environment);
             	} else {
+            		this.plugin.getServer().broadcastMessage(ChatColor.RED + "Attempting to create a new World with seed " + seed);
             		Long seedLong;
             		try {
                         seedLong = Long.parseLong(seed);
