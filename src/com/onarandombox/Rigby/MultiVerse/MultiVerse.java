@@ -134,11 +134,26 @@ public class MultiVerse extends JavaPlugin {
 	}
 	
 	public void reloadPlayerSessions() {
-		Player[] p = this.getServer().getOnlinePlayers();
-		for (Player element : p) {
-			this.playerSessions.put(element.getName(), new MVPlayerSession(element, this.configMV));
+		Player[] players = this.getServer().getOnlinePlayers();
+		for (Player player : players) {
+			this.playerSessions.put(player.getName(), new MVPlayerSession(player, this.configMV));
 		}
 	}
+	
+	/**
+     * Grab the players session if one exists, otherwise create a session then return it.
+     * 
+     * @param player
+     * @return
+     */
+	public MVPlayerSession getPlayerSession(Player player) {
+        if (playerSessions.containsKey(player.getName())) {
+            return playerSessions.get(player.getName());
+        } else {
+            playerSessions.put(player.getName(), new MVPlayerSession(player, configMV));
+            return playerSessions.get(player.getName());
+        }
+    }
 	
 	/**
 	 * When a command is run this Function will process it and perform the appropriate action.

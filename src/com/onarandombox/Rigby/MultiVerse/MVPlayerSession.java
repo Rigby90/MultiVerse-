@@ -2,6 +2,7 @@ package com.onarandombox.Rigby.MultiVerse;
 
 import java.util.Date;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.config.Configuration;
@@ -13,7 +14,7 @@ public class MVPlayerSession {
     // Data on the Players selected locations
     private Location location1 = null;
     private Location location2 = null;
-    public Location loc = null;
+    private Location loc = null;
 
     public Boolean timer = false;
     public Boolean teleporting = false;
@@ -47,6 +48,19 @@ public class MVPlayerSession {
         this.location2 = location;
     }
 
+    public Location getLocation() {
+        if(this.loc==null){
+            Player pl = Bukkit.getServer().getPlayer(player.getName());
+            return new Location(pl.getWorld(),0,0,0);
+        } else {
+            return this.loc;
+        }
+    }
+    
+    public void setLocation(Location location) {
+        this.loc = location;
+    }
+    
     public Location getLocation1() {
         return this.location1;
     }

@@ -191,22 +191,15 @@ public class MVPlayerListener extends PlayerListener {
          * Grab the Player and our Players Session
          */
         final Player pl = event.getPlayer();
-        MVPlayerSession ps = this.plugin.playerSessions.get(pl.getName());
-        if (ps == null) {
-            this.plugin.reloadPlayerSessions();
-            ps = this.plugin.playerSessions.get(pl.getName());
-        }
-        Location poloc = ps.loc;
-        Location pnloc = pl.getLocation();
-        if (ps.loc != null) {
-            if (poloc.getBlockX() == pnloc.getBlockX() && poloc.getBlockY() == pnloc.getBlockY() && poloc.getBlockZ() == pnloc.getBlockZ()) {
-                return;
-            } else {
-                ps.loc = pl.getLocation();
-            }
+        final Location loc = pl.getLocation();
+        
+        MVPlayerSession ps = this.plugin.getPlayerSession(pl);
+        if (ps.getLocation().getBlockX() == loc.getBlockX() && ps.getLocation().getBlockY() == loc.getBlockY() && ps.getLocation().getBlockZ() == loc.getBlockZ()) {
+            return;
         } else {
-            ps.loc = pl.getLocation();
+            ps.setLocation(loc); // Update the Players Session to the new Location.
         }
+        
         /**
          * Start the Price off at 0, this will change according to the Portal/World Settings.
          */
