@@ -49,18 +49,18 @@ public class MVPlayerSession {
     }
 
     public Location getLocation() {
-        if(this.loc==null){
+        if (this.loc == null) {
             Player pl = Bukkit.getServer().getPlayer(player.getName());
-            return new Location(pl.getWorld(),0,0,0);
+            return new Location(pl.getWorld(), 0, 0, 0);
         } else {
             return this.loc;
         }
     }
-    
+
     public void setLocation(Location location) {
         this.loc = location;
     }
-    
+
     public Location getLocation1() {
         return this.location1;
     }

@@ -59,8 +59,8 @@ public class MVCommands {
             player.sendMessage(ChatColor.RED + "/mvcreate WORLDNAME ENVIRONMENT - Create a new World.");
             player.sendMessage(ChatColor.RED + "Example - /mvcreate hellworld nether");
             return;
-        } else if(args.length > 3) {
-        	player.sendMessage("Too many parameters to create a new world");
+        } else if (args.length > 3) {
+            player.sendMessage("Too many parameters to create a new world");
             player.sendMessage(ChatColor.RED + "/mvcreate WORLDNAME ENVIRONMENT - Create a new World.");
             player.sendMessage(ChatColor.RED + "Example - /mvcreate hellworld nether");
         }
@@ -69,12 +69,12 @@ public class MVCommands {
             player.sendMessage(ChatColor.RED + "If you are confident it is a world you can import with /mvimport");
             return;
         }
-        if(args.length > 2) {
-        	worldCreateImport(args[0].toString(), args[1].toString(), player, args[2]);
+        if (args.length > 2) {
+            worldCreateImport(args[0].toString(), args[1].toString(), player, args[2]);
         } else {
-        	worldCreateImport(args[0].toString(), args[1].toString(), player, null);
+            worldCreateImport(args[0].toString(), args[1].toString(), player, null);
         }
-        
+
     }
 
     /**
@@ -206,21 +206,21 @@ public class MVCommands {
         if (!this.plugin.MVWorlds.containsKey(name)) {
             World world;
             if (this.plugin.getServer().getWorld(name) == null) {
-            	if(seed == null) {
-					this.plugin.getServer().broadcastMessage(ChatColor.RED + "Attempting to create a new World");
-					
-					world = this.plugin.getServer().createWorld(name, environment);
-            	} else {
-            		this.plugin.getServer().broadcastMessage(ChatColor.RED + "Attempting to create a new World with seed " + seed);
-            		Long seedLong;
-            		try {
+                if (seed == null) {
+                    this.plugin.getServer().broadcastMessage(ChatColor.RED + "Attempting to create a new World");
+
+                    world = this.plugin.getServer().createWorld(name, environment);
+                } else {
+                    this.plugin.getServer().broadcastMessage(ChatColor.RED + "Attempting to create a new World with seed " + seed);
+                    Long seedLong;
+                    try {
                         seedLong = Long.parseLong(seed);
                     } catch (NumberFormatException e) {
                         seedLong = (long) seed.hashCode();
                     }
                     world = this.plugin.getServer().createWorld(name, environment, seedLong);
-            	}
-                
+                }
+
                 log.info("[MultiVerse] " + name + " - World Created as - " + env.toString());
             } else {
                 world = this.plugin.getServer().getWorld(name);
